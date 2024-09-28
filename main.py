@@ -35,6 +35,7 @@ with st.form("Get Company Information"):
         market_physical = st.checkbox("Physical Product")
         market_digital = st.checkbox("Digital Product")
         market_service = st.checkbox("Service")
+        main_message = st.text_area("Main Message")
     with col2:
         company_description = st.text_area("Company Description")
         product_description = st.text_area("Detailed Product/Service Description")
@@ -42,9 +43,8 @@ with st.form("Get Company Information"):
         customer_b2b = st.checkbox("B2B")
         customer_b2c = st.checkbox("B2C")
         customer_b2b2c = st.checkbox("B2B2C")
+        target_customer = st.text_area("Target Customer")
 
-    # main_message = st.text_area("Main Message")
-    # target_customer = st.text_area("Target Customer")
     # Submit button
     submitted = st.form_submit_button("Submit")
 
