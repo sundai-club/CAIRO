@@ -82,23 +82,19 @@ def generate_hypothesis(company_details):
     return hypothesis
 
 
-desc = """
-Sundai Club is an innovative community of engineers and developers focused on creating applications that leverage cutting-edge AI tools. The club operates on a subscription model, offering members access to a range of benefits and resources to support their AI-driven app development projects.
-Key Features
-Weekly Builds: Sundai Club members collaborate on building new AI applications every week, fostering a culture of continuous innovation and learning.
-Exclusive Access: Members gain access to the latest AI tools and technologies, allowing them to stay at the forefront of AI development.
-Community Engagement: The club provides a platform for like-minded engineers to connect, share ideas, and collaborate on projects.
-Membership Benefits
-AI Tool Access: Members receive access to a curated selection of advanced AI tools, enabling them to experiment with and integrate these technologies into their projects.
-Learning Resources: The club offers educational materials and guidance to help members enhance their skills in AI application development.
-Networking Opportunities: Sundai Club facilitates connections between engineers, potentially leading to collaborations and knowledge sharing.
-Project Focus
-The applications developed by Sundai Club members likely span a wide range of domains, leveraging various AI technologies such as:
-Natural Language Processing
-Computer Vision
-Machine Learning
-Generative AI
-By focusing on the latest AI tools, Sundai Club members are positioned to create innovative applications that push the boundaries of what's possible with artificial intelligence.
 
-"""
-print(generate_hypothesis(desc))
+def edit_hypothesis(hypothesis, conversation):
+    messages = [{'role': 'system', 'content': system_prompt},
+        {"role": "user", "content": prompt.format(company_details=conversation)}]
+
+    hypothesis = None
+    for _ in range(MAX_RETRIES):
+        try:
+            response = openai_api.get_completion(messages, model="gpt-4o-mini")
+            hypothesis = parse_llm_response(response)                
+            if hypothesis is not None:
+                return hypothesis
+            
+        except:
+            pass
+    return hypothesis
