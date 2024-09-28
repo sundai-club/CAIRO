@@ -1,35 +1,47 @@
 import streamlit as st
 
-with st.form("my_form"):
-    st.write("Inside the form")
+st.set_page_config(layout="wide")
+
+st.header("Welcome to CAIRO: Chief AI Revenue Officer")
+
+
+st.markdown(
+            (
+                '<hr style="background-color: #71eea8; margin-top: 0;'
+                ' margin-bottom: 0; height: 3px; border: none; border-radius: 3px;">'
+            ),
+            unsafe_allow_html=True,
+        )
+
+
+with st.form("Get Company Information"):
+    st.write("Please Input Company Information below")
+
+    col1, col2 = st.columns([3,4])
 
     # Input fields for company information
-    company_website = st.text_input("Company Website URL")
-    uploaded_files = st.file_uploader("Upload Files", accept_multiple_files=True)
-    company_name = st.text_input("Company Name")
-    location = st.text_input("Location")
-    company_description = st.text_area("Company Description")
-    product_description = st.text_area("Detailed Product/Service Description")
+    with col1:
+        company_name = st.text_input("Company Name",placeholder="Company Name")
+        company_website = st.text_input("Company Website URL")
+        # Color picker for selecting a color
+        selected_color = st.color_picker("Pick a Brand Color")
+        uploaded_files = st.file_uploader("Upload Logo", accept_multiple_files=True)
+        location = st.text_input("Location")
+        # Add checkboxes for market type
+        st.write("How type of product are you trying to sell?")
+        market_physical = st.checkbox("Physical Product")
+        market_digital = st.checkbox("Digital Product")
+        market_service = st.checkbox("Service")
+    with col2:
+        company_description = st.text_area("Company Description")
+        product_description = st.text_area("Detailed Product/Service Description")
+        st.write("What is your Business Model")
+        customer_b2b = st.checkbox("B2B")
+        customer_b2c = st.checkbox("B2C")
+        customer_b2b2c = st.checkbox("B2B2C")
+
     main_message = st.text_area("Main Message")
     target_customer = st.text_area("Target Customer")
-# Add checkboxes for B2B, B2C, or B2B2C
-    st.write("Are your customers primarily businesses (B2B), individual consumers (B2C), or both (B2B2C)?")
-    customer_b2b = st.checkbox("B2B")
-    customer_b2c = st.checkbox("B2C")
-    customer_b2b2c = st.checkbox("B2B2C")
-
-    # Add checkboxes for market type
-    st.write("How do your customers typically use your product?")
-    market_physical = st.checkbox("Physical Product")
-    market_digital = st.checkbox("Digital Product")
-    market_service = st.checkbox("Service")
-
-    # Color picker for selecting a color
-    selected_color = st.color_picker("Pick a Color")
-
-    # Add a file uploader
-    logo_upload = st.file_uploader("Upload Logo", accept_multiple_files=True)
-
     # Submit button
     submitted = st.form_submit_button("Submit")
 
