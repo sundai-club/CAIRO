@@ -53,7 +53,6 @@ with st.form("Get Company Information"):
     if submitted:
         # Output the form inputs
         st.write("Company Website:", company_website)
-        st.write("Uploaded Files:", uploaded_files)
         st.write("Company Name:", company_name)
         st.write("Location:", location)
         st.write("Company Description:", company_description)
