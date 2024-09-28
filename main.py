@@ -100,7 +100,3 @@ with st.form("Get Company Information"):
         # TODO: 2 RANK THE LIST OF LEADS ASYNC
 
         # TODO: 3 CREATE THE DECKS ASYNC
-
-
-# Outside the form
-st.write("Outside the form - TBD")
