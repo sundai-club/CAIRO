@@ -7,7 +7,6 @@ st.set_page_config(layout="wide")
 
 st.header("Welcome to CAIRO: Chief AI Revenue Officer")
 
-
 st.markdown(
             (
                 '<hr style="background-color: #71eea8; margin-top: 0;'
@@ -35,15 +34,13 @@ with st.form("Get Company Information"):
         market_physical = st.checkbox("Physical Product")
         market_digital = st.checkbox("Digital Product")
         market_service = st.checkbox("Service")
-        main_message = st.text_area("Main Message")
     with col2:
-        company_description = st.text_area("Company Description")
-        product_description = st.text_area("Detailed Product/Service Description")
+        company_description = st.text_area("Company Description",height=200)
+        product_description = st.text_area("Detailed Product/Service Description",height=200)
         st.write("What is your Business Model")
         customer_b2b = st.checkbox("B2B")
         customer_b2c = st.checkbox("B2C")
         customer_b2b2c = st.checkbox("B2B2C")
-        target_customer = st.text_area("Target Customer")
 
     # Submit button
     submitted = st.form_submit_button("Submit")
@@ -56,8 +53,6 @@ with st.form("Get Company Information"):
         st.write("Location:", location)
         st.write("Company Description:", company_description)
         st.write("Product/Service Description:", product_description)
-        st.write("Main Message:", main_message)
-        st.write("Target Customer:", target_customer)
         st.write("Customer Type - B2B:", customer_b2b)
         st.write("Customer Type - B2C:", customer_b2c)
         st.write("Customer Type - B2B2C:", customer_b2b2c)
@@ -73,8 +68,6 @@ with st.form("Get Company Information"):
             "location": location,
             "company_description": company_description,
             "product_description": product_description,
-            "main_message": main_message,
-            "target_customer": target_customer,
             "customer_b2b": customer_b2b,
             "customer_b2c": customer_b2c,
             "customer_b2b2c": customer_b2b2c,
