@@ -1,4 +1,7 @@
+import json
 import streamlit as st
+from src.hypothesis_generator import generate_hypothesis
+
 
 st.set_page_config(layout="wide")
 
@@ -40,8 +43,8 @@ with st.form("Get Company Information"):
         customer_b2c = st.checkbox("B2C")
         customer_b2b2c = st.checkbox("B2B2C")
 
-    main_message = st.text_area("Main Message")
-    target_customer = st.text_area("Target Customer")
+    # main_message = st.text_area("Main Message")
+    # target_customer = st.text_area("Target Customer")
     # Submit button
     submitted = st.form_submit_button("Submit")
 
@@ -62,6 +65,41 @@ with st.form("Get Company Information"):
         st.write("Market Type - Digital Product:", market_digital)
         st.write("Market Type - Service:", market_service)
         st.write("Selected Color:", selected_color)
+
+        form_data = {
+            "company_website": company_website,
+            "uploaded_files": [file.name for file in uploaded_files] if uploaded_files else [],
+            "company_name": company_name,
+            "location": location,
+            "company_description": company_description,
+            "product_description": product_description,
+            "main_message": main_message,
+            "target_customer": target_customer,
+            "customer_b2b": customer_b2b,
+            "customer_b2c": customer_b2c,
+            "customer_b2b2c": customer_b2b2c,
+            "market_physical": market_physical,
+            "market_digital": market_digital,
+            "market_service": market_service,
+            "selected_color": selected_color,
+            "logo_upload": [file.name for file in logo_upload] if logo_upload else []
+        }
+
+        # Convert dictionary to JSON string
+        form_data_json = json.dumps(form_data)
+
+        # Output the JSON
+        # st.write("Form Data as JSON:")
+        # st.json(form_data_json)
+
+        hypothesis = generate_hypothesis(form_data_json)
+
+        st.write("Hypothesis:", hypothesis)
+
+        # TODO: 2 RANK THE LIST OF LEADS ASYNC
+
+        # TODO: 3 CREATE THE DECKS ASYNC
+
 
 # Outside the form
 st.write("Outside the form - TBD")
