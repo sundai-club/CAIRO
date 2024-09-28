@@ -6,6 +6,7 @@ from src.openai_api import OpenAIApi
 from src.prompts import hypotheis_update_prompt
 from src.utils import parse_llm_response
 from src.deck_generation import process_multiple_jsons
+# from src.process_investor_list import get_aldo_data
 
 import pandas as pd
 
@@ -138,7 +139,7 @@ if 'hypothesis' in st.session_state:
             messages = [{"role": "user", "content": input_prompt}]
             full_response = openai_api.get_completion(messages)
             new_hypothesis = parse_llm_response(full_response)
-            message_placeholder.markdown(full_response)
+            message_placeholder.markdown(new_hypothesis)
             st.session_state.hypothesis = new_hypothesis
 
         
