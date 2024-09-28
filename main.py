@@ -34,22 +34,22 @@ with st.form("Get Company Information"):
         company_website = st.text_input("Company Website URL")
         # Color picker for selecting a color
         selected_color = st.color_picker("Pick a Brand Color")
-        logo_upload = st.file_uploader("Upload Logo", accept_multiple_files=True)
-        location = st.text_input("Location")
+        # logo_upload = st.file_uploader("Upload Logo", accept_multiple_files=True)
+        # location = st.text_input("Location")
         # Add checkboxes for market type
-        st.write("How type of product are you trying to sell?")
-        market_physical = st.checkbox("Physical Product")
-        market_digital = st.checkbox("Digital Product")
-        market_service = st.checkbox("Service")
-        main_message = st.text_area("Main Message")
+        # st.write("How type of product are you trying to sell?")
+        # market_physical = st.checkbox("Physical Product")
+        # market_digital = st.checkbox("Digital Product")
+        # market_service = st.checkbox("Service")
+        # main_message = st.text_area("Main Message")
     with col2:
-        company_description = st.text_area("Company Description")
-        product_description = st.text_area("Detailed Product/Service Description")
-        st.write("What is your Business Model")
-        customer_b2b = st.checkbox("B2B")
-        customer_b2c = st.checkbox("B2C")
-        customer_b2b2c = st.checkbox("B2B2C")
-        target_customer = st.text_area("Target Customer")
+        company_description = st.text_area("Company Description",height=200)
+        # product_description = st.text_area("Detailed Product/Service Description")
+        # st.write("What is your Business Model")
+        # customer_b2b = st.checkbox("B2B")
+        # customer_b2c = st.checkbox("B2C")
+        # customer_b2b2c = st.checkbox("B2B2C")
+        # target_customer = st.text_area("Target Customer")
 
     # TODO: Add a chat bot
 
@@ -60,35 +60,35 @@ with st.form("Get Company Information"):
         # Output the form inputs
         st.write("Company Website:", company_website)
         st.write("Company Name:", company_name)
-        st.write("Location:", location)
+        # st.write("Location:", location)
         st.write("Company Description:", company_description)
-        st.write("Product/Service Description:", product_description)
-        st.write("Main Message:", main_message)
-        st.write("Target Customer:", target_customer)
-        st.write("Customer Type - B2B:", customer_b2b)
-        st.write("Customer Type - B2C:", customer_b2c)
-        st.write("Customer Type - B2B2C:", customer_b2b2c)
-        st.write("Market Type - Physical Product:", market_physical)
-        st.write("Market Type - Digital Product:", market_digital)
-        st.write("Market Type - Service:", market_service)
+        # st.write("Product/Service Description:", product_description)
+        # st.write("Main Message:", main_message)
+        # st.write("Target Customer:", target_customer)
+        # st.write("Customer Type - B2B:", customer_b2b)
+        # st.write("Customer Type - B2C:", customer_b2c)
+        # st.write("Customer Type - B2B2C:", customer_b2b2c)
+        # st.write("Market Type - Physical Product:", market_physical)
+        # st.write("Market Type - Digital Product:", market_digital)
+        # st.write("Market Type - Service:", market_service)
         st.write("Selected Color:", selected_color)
 
         form_data = {
             "company_website": company_website,
             "company_name": company_name,
-            "location": location,
+            # "location": location,
             "company_description": company_description,
-            "product_description": product_description,
-            "main_message": main_message,
-            "target_customer": target_customer,
-            "customer_b2b": customer_b2b,
-            "customer_b2c": customer_b2c,
-            "customer_b2b2c": customer_b2b2c,
-            "market_physical": market_physical,
-            "market_digital": market_digital,
-            "market_service": market_service,
+            # "product_description": product_description,
+            # "main_message": main_message,
+            # "target_customer": target_customer,
+            # "customer_b2b": customer_b2b,
+            # "customer_b2c": customer_b2c,
+            # "customer_b2b2c": customer_b2b2c,
+            # "market_physical": market_physical,
+            # "market_digital": market_digital,
+            # "market_service": market_service,
             "color": selected_color,
-            "logo_upload": [file.name for file in logo_upload] if logo_upload else []
+            # "logo_upload": [file.name for file in logo_upload] if logo_upload else []
         }
 
         form_data_json = json.dumps(form_data)
@@ -104,9 +104,6 @@ with st.form("Get Company Information"):
             st.session_state.conversation = []
 
         
-
-
-
         st.write("Hypothesis:", hypothesis)
 
 
