@@ -1,5 +1,6 @@
 import json
 import streamlit as st
+
 from src.hypothesis_generator import generate_hypothesis
 from src.openai_api import OpenAIApi
 from src.prompts import hypotheis_update_prompt
@@ -103,9 +104,6 @@ with st.form("Get Company Information"):
         if 'conversation' not in st.session_state:
             st.session_state.conversation = []
 
-        
-
-
 
         st.write("Hypothesis:", hypothesis)
 
@@ -161,4 +159,10 @@ if 'hypothesis' in st.session_state:
     # TODO: 2 RANK THE LIST OF LEADS ASYNC
         deck_links = process_multiple_jsons(hypothesis)
 
-        st.write("Deck Links:", deck_links)
+        for i, (hypotheses_, deck_link) in enumerate(zip(hypothesis, deck_links)):
+            with st.expander(f"Hypothesis {i+1}"):
+                for key, value in hypotheses_.items():
+                    st.write(f"{key}: {value}")
+                st.write(f"Deck Link: {deck_link}")
+                st.components.v1.iframe(f"{deck_link}", height=400, scrolling=True)
+
