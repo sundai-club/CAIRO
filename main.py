@@ -1,7 +1,12 @@
 import json
 import streamlit as st
 from src.hypothesis_generator import generate_hypothesis
+from src.openai_api import OpenAIApi
+from src.prompts import hypotheis_update_prompt
+from src.utils import parse_llm_response
 
+
+openai_api = OpenAIApi()
 
 st.set_page_config(layout="wide")
 
@@ -15,6 +20,7 @@ st.markdown(
             ),
             unsafe_allow_html=True,
         )
+
 
 
 with st.form("Get Company Information"):
@@ -85,17 +91,59 @@ with st.form("Get Company Information"):
             "logo_upload": [file.name for file in logo_upload] if logo_upload else []
         }
 
-        # Convert dictionary to JSON string
         form_data_json = json.dumps(form_data)
 
-        # Output the JSON
-        # st.write("Form Data as JSON:")
-        # st.json(form_data_json)
-
         hypothesis = generate_hypothesis(form_data_json)
+
+        if 'hypothesis' not in st.session_state:
+            st.session_state.hypothesis = hypothesis
+        
+        if 'conversation' not in st.session_state:
+            st.session_state.conversation = []
+
+        
+
+
 
         st.write("Hypothesis:", hypothesis)
 
         # TODO: 2 RANK THE LIST OF LEADS ASYNC
 
         # TODO: 3 CREATE THE DECKS ASYNC
+
+if 'hypothesis' in st.session_state:
+    st.subheader("Confirm the Hypothesis")
+
+    # Display conversation history
+    for message in st.session_state.conversation:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
+
+    # Chat input
+    if user_input := st.chat_input("Please let me know if you would like to correct any of the hypothesis if you are not satisfied with the result"):
+        # Add user message to conversation
+        st.session_state.conversation.append({"role": "user", "content": user_input})
+        with st.chat_message("user"):
+            st.markdown(user_input)
+
+        # Generate LLM response
+        with st.chat_message("assistant"):
+            message_placeholder = st.empty()
+            input_prompt = hypotheis_update_prompt.format(
+                company_details=st.session_state.conversation,
+                hypotheses=st.session_state.hypothesis,
+                conversation_history=json.dumps(st.session_state.conversation),
+                user_input=user_input
+            )
+            messages = [{"role": "user", "content": input_prompt}]
+            full_response = openai_api.get_completion(messages)
+            new_hypothesis = parse_llm_response(full_response)
+            message_placeholder.markdown(full_response)
+        
+        # Add assistant response to conversation
+        st.session_state.conversation.append({"role": "assistant", "content": full_response})
+
+    # "Done" button to end the conversation
+    if st.button("Done"):
+        st.write("Chat session ended. Thank you for using CAIRO!")
+        # Here you can add any wrap-up logic or final processing
