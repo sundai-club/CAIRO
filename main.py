@@ -7,6 +7,10 @@ from src.prompts import hypotheis_update_prompt
 from src.utils import parse_llm_response
 from src.deck_generation import process_multiple_jsons
 
+import pandas as pd
+
+st.session_state.df = pd.read_csv('dev_tools_investors_preseed.xlsx - Sheet1.csv')
+
 openai_api = OpenAIApi()
 
 st.set_page_config(layout="wide")
@@ -166,5 +170,6 @@ if 'hypothesis' in st.session_state:
                 for key, value in hypo_dict.items():
                     st.markdown(f"**{key}**: {value}")
                 st.markdown(f"**Deck Link**: {deck_link[1]}")
+                st.dataframe(st.session_state.df.sample(5))
 
 
