@@ -28,7 +28,7 @@ with st.form("Get Company Information"):
         company_website = st.text_input("Company Website URL")
         # Color picker for selecting a color
         selected_color = st.color_picker("Pick a Brand Color")
-        uploaded_files = st.file_uploader("Upload Logo", accept_multiple_files=True)
+        logo_upload = st.file_uploader("Upload Logo", accept_multiple_files=True)
         location = st.text_input("Location")
         # Add checkboxes for market type
         st.write("How type of product are you trying to sell?")
@@ -44,6 +44,8 @@ with st.form("Get Company Information"):
         customer_b2c = st.checkbox("B2C")
         customer_b2b2c = st.checkbox("B2B2C")
         target_customer = st.text_area("Target Customer")
+
+    # TODO: Add a chat bot
 
     # Submit button
     submitted = st.form_submit_button("Submit")
@@ -68,7 +70,6 @@ with st.form("Get Company Information"):
 
         form_data = {
             "company_website": company_website,
-            "uploaded_files": [file.name for file in uploaded_files] if uploaded_files else [],
             "company_name": company_name,
             "location": location,
             "company_description": company_description,
