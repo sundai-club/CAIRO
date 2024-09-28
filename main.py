@@ -1,4 +1,7 @@
+import json
 import streamlit as st
+from src.hypothesis_generator import generate_hypothesis
+
 
 with st.form("my_form"):
     st.write("Inside the form")
@@ -12,7 +15,7 @@ with st.form("my_form"):
     product_description = st.text_area("Detailed Product/Service Description")
     main_message = st.text_area("Main Message")
     target_customer = st.text_area("Target Customer")
-# Add checkboxes for B2B, B2C, or B2B2C
+    # Add checkboxes for B2B, B2C, or B2B2C
     st.write("Are your customers primarily businesses (B2B), individual consumers (B2C), or both (B2B2C)?")
     customer_b2b = st.checkbox("B2B")
     customer_b2c = st.checkbox("B2C")
@@ -50,6 +53,41 @@ with st.form("my_form"):
         st.write("Market Type - Digital Product:", market_digital)
         st.write("Market Type - Service:", market_service)
         st.write("Selected Color:", selected_color)
+
+        form_data = {
+            "company_website": company_website,
+            "uploaded_files": [file.name for file in uploaded_files] if uploaded_files else [],
+            "company_name": company_name,
+            "location": location,
+            "company_description": company_description,
+            "product_description": product_description,
+            "main_message": main_message,
+            "target_customer": target_customer,
+            "customer_b2b": customer_b2b,
+            "customer_b2c": customer_b2c,
+            "customer_b2b2c": customer_b2b2c,
+            "market_physical": market_physical,
+            "market_digital": market_digital,
+            "market_service": market_service,
+            "selected_color": selected_color,
+            "logo_upload": [file.name for file in logo_upload] if logo_upload else []
+        }
+
+        # Convert dictionary to JSON string
+        form_data_json = json.dumps(form_data)
+
+        # Output the JSON
+        # st.write("Form Data as JSON:")
+        # st.json(form_data_json)
+
+        hypothesis = generate_hypothesis(form_data_json)
+
+        st.write("Hypothesis:", hypothesis)
+
+        # TODO: 2 RANK THE LIST OF LEADS ASYNC
+
+        # TODO: 3 CREATE THE DECKS ASYNC
+
 
 # Outside the form
 st.write("Outside the form - TBD")
