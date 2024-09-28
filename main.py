@@ -4,13 +4,13 @@ from src.hypothesis_generator import generate_hypothesis
 from src.openai_api import OpenAIApi
 from src.prompts import hypotheis_update_prompt
 from src.utils import parse_llm_response
-
+from src.deck_generation import process_multiple_jsons
 
 openai_api = OpenAIApi()
 
 st.set_page_config(layout="wide")
 
-st.header("Welcome to CAIRO: Chief AI Revenue Officer")
+st.header("CAIRO: Validate market hypotheses in minutes")
 
 
 st.markdown(
@@ -87,11 +87,13 @@ with st.form("Get Company Information"):
             "market_physical": market_physical,
             "market_digital": market_digital,
             "market_service": market_service,
-            "selected_color": selected_color,
+            "color": selected_color,
             "logo_upload": [file.name for file in logo_upload] if logo_upload else []
         }
 
         form_data_json = json.dumps(form_data)
+        if 'form_data_json' not in st.session_state:
+            st.session_state.form_data = form_data
 
         hypothesis = generate_hypothesis(form_data_json)
 
@@ -107,9 +109,6 @@ with st.form("Get Company Information"):
 
         st.write("Hypothesis:", hypothesis)
 
-        # TODO: 2 RANK THE LIST OF LEADS ASYNC
-
-        # TODO: 3 CREATE THE DECKS ASYNC
 
 if 'hypothesis' in st.session_state:
     st.subheader("Confirm the Hypothesis")
@@ -139,11 +138,27 @@ if 'hypothesis' in st.session_state:
             full_response = openai_api.get_completion(messages)
             new_hypothesis = parse_llm_response(full_response)
             message_placeholder.markdown(full_response)
+            st.session_state.hypothesis = new_hypothesis
+
         
         # Add assistant response to conversation
         st.session_state.conversation.append({"role": "assistant", "content": full_response})
 
     # "Done" button to end the conversation
     if st.button("Done"):
-        st.write("Chat session ended. Thank you for using CAIRO!")
+        st.write("CAIRO starting...")
         # Here you can add any wrap-up logic or final processing
+        hypothesis = st.session_state.hypothesis
+        company_data = st.session_state.form_data
+
+        # combine each of the data into a single dictionary
+        for item in hypothesis:
+            item.update(company_data)
+
+        for item in hypothesis:
+            st.write(item)
+
+    # TODO: 2 RANK THE LIST OF LEADS ASYNC
+        deck_links = process_multiple_jsons(hypothesis)
+
+        st.write("Deck Links:", deck_links)
