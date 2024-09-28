@@ -1,53 +1,90 @@
-import streamlit as st
 import json
-from src.scraper import scrape_data
+import streamlit as st
 
-# Set the title of the app
-st.title("Market Hypothesis Validation")
+from src.hypothesis_generator import generate_hypothesis
 
-with st.form("my_form"):
-    st.write("Inside the form")
+
+st.set_page_config(layout="wide")
+
+st.header("Welcome to CAIRO: Chief AI Revenue Officer")
+
+
+st.markdown(
+            (
+                '<hr style="background-color: #71eea8; margin-top: 0;'
+                ' margin-bottom: 0; height: 3px; border: none; border-radius: 3px;">'
+            ),
+            unsafe_allow_html=True,
+        )
+
+
+with st.form("Get Company Information"):
+    st.write("Please Input Company Information below")
+
+    col1, col2 = st.columns([3,4])
 
     # Input fields for company information
-    company_website = st.text_input("Company Website URL")
-    uploaded_files = st.file_uploader("Upload Files", accept_multiple_files=True)
-    company_name = st.text_input("Company Name")
-    location = st.text_input("Location")
-    company_description = st.text_area("Company Description")
-    product_description = st.text_area("Detailed Product/Service Description")
-    main_message = st.text_area("Main Message")
-    target_customer = st.text_area("Target Customer")
-# Add checkboxes for B2B, B2C, or B2B2C
-    st.write("Are your customers primarily businesses (B2B), individual consumers (B2C), or both (B2B2C)?")
-    customer_b2b = st.checkbox("B2B")
-    customer_b2c = st.checkbox("B2C")
-    customer_b2b2c = st.checkbox("B2B2C")
+    with col1:
+        company_name = st.text_input("Company Name",placeholder="Company Name")
+        company_website = st.text_input("Company Website URL")
+        # Color picker for selecting a color
+        selected_color = st.color_picker("Pick a Brand Color")
+        uploaded_files = st.file_uploader("Upload Logo", accept_multiple_files=True)
+        location = st.text_input("Location")
+        # Add checkboxes for market type
+        st.write("How type of product are you trying to sell?")
+        market_physical = st.checkbox("Physical Product")
+        market_digital = st.checkbox("Digital Product")
+        market_service = st.checkbox("Service")
+    with col2:
+        company_description = st.text_area("Company Description")
+        product_description = st.text_area("Detailed Product/Service Description")
+        st.write("What is your Business Model")
+        customer_b2b = st.checkbox("B2B")
+        customer_b2c = st.checkbox("B2C")
+        customer_b2b2c = st.checkbox("B2B2C")
 
-    # Add checkboxes for market type
-    st.write("How do your customers typically use your product?")
-    market_physical = st.checkbox("Physical Product")
-    market_digital = st.checkbox("Digital Product")
-    market_service = st.checkbox("Service")
-
-    # Color picker for selecting a color
-    selected_color = st.color_picker("Pick a Color")
-
-    # Add a file uploader
-    logo_upload = st.file_uploader("Upload Logo", accept_multiple_files=True)
-
+    # main_message = st.text_area("Main Message")
+    # target_customer = st.text_area("Target Customer")
     # Submit button
     submitted = st.form_submit_button("Submit")
 
     if submitted:
 
-        company_website_data = scrape_data(company_website)
-        st.write(company_website_data)
-        company_data = {'company_website': company_website, 'company_name': company_name, 'location': location,
-                        'company_description': company_description, 'product_description': product_description,
-                        'main_message': main_message, 'target_customer': target_customer, 'customer_b2b': customer_b2b,
-                        'customer_b2c': customer_b2c, 'customer_b2b2c': customer_b2b2c, 'market_physical': market_physical,
-                        'market_digital': market_digital, 'market_service': market_service, 'logo_upload': logo_upload, 
-                        'company_website_data': company_website_data}
+        form_data = {
+            "company_website": company_website,
+            "uploaded_files": [file.name for file in uploaded_files] if uploaded_files else [],
+            "company_name": company_name,
+            "location": location,
+            "company_description": company_description,
+            "product_description": product_description,
+            "main_message": main_message,
+            "target_customer": target_customer,
+            "customer_b2b": customer_b2b,
+            "customer_b2c": customer_b2c,
+            "customer_b2b2c": customer_b2b2c,
+            "market_physical": market_physical,
+            "market_digital": market_digital,
+            "market_service": market_service,
+            "selected_color": selected_color,
+            "logo_upload": [file.name for file in logo_upload] if logo_upload else []
+        }
 
-        with open("company_data.json", "w") as f:
-            json.dump(company_data, f)
+        # Convert dictionary to JSON string
+        form_data_json = json.dumps(form_data)
+
+        # Output the JSON
+        # st.write("Form Data as JSON:")
+        # st.json(form_data_json)
+
+        hypothesis = generate_hypothesis(form_data_json)
+
+        st.write("Hypothesis:", hypothesis)
+
+        # TODO: 2 RANK THE LIST OF LEADS ASYNC
+
+        # TODO: 3 CREATE THE DECKS ASYNC
+
+
+# Outside the form
+st.write("Outside the form - TBD")

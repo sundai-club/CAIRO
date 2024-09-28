@@ -1,5 +1,8 @@
-from openai_api import OpenAIApi
-from utils import parse_llm_response
+from src.openai_api import OpenAIApi
+from src.utils import parse_llm_response
+
+from dotenv import load_dotenv
+load_dotenv()
 
 
 openai_api = OpenAIApi()
