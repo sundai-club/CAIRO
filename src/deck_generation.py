@@ -9,8 +9,8 @@ async def send_post_request(session, url, payload, headers, context):
         async with session.post(url, json=payload, headers=headers) as response:
             if response.status == 200:
                 response_data = await response.json()
-                generated_deck_uuid = response_data.get("uuid")
-                return context, generated_deck_uuid
+                generated_deck_url = response_data.get("url")
+                return context, generated_deck_url
             else:
                 return (
                     context,
