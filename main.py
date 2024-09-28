@@ -1,5 +1,6 @@
 import json
 import streamlit as st
+
 from src.hypothesis_generator import generate_hypothesis
 from src.openai_api import OpenAIApi
 from src.prompts import hypotheis_update_prompt
