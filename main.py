@@ -103,9 +103,6 @@ with st.form("Get Company Information"):
         if 'conversation' not in st.session_state:
             st.session_state.conversation = []
 
-        
-
-
 
         st.write("Hypothesis:", hypothesis)
 
@@ -167,4 +164,4 @@ if 'hypothesis' in st.session_state:
                     st.write(f"{key}: {value}")
                 st.write(f"Deck Link: {deck_link}")
                 st.components.v1.iframe(f"{deck_link}", height=400, scrolling=True)
-                
+
