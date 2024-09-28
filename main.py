@@ -152,18 +152,19 @@ if 'hypothesis' in st.session_state:
         for item in hypothesis:
             item.update(company_data)
 
-        for item in hypothesis:
-            st.write(item)
+        # for item in hypothesis:
+        #     st.write(item)
 
     # TODO: 2 RANK THE LIST OF LEADS ASYNC
         deck_links = process_multiple_jsons(hypothesis)
-        st.write(deck_links)
+        # st.write(deck_links)
 
         for i, (hypotheses_, deck_link) in enumerate(zip(hypothesis, deck_links)):
             hypo_dict = {k:v for k, v in hypotheses_.items() if k in ["hypothesis", "pain_point", "pitch"]}
-            with st.expander(f"Hypothesis {i+1}"):
+            st.markdown(f"### Hypothesis {i+1}")
+            with st.expander(f"Expand for details"):
                 for key, value in hypo_dict.items():
-                    st.write(f"{key}: {value}")
-                st.write(f"Deck Link: {deck_link[1]}")
+                    st.markdown(f"**{key}**: {value}")
+                st.markdown(f"**Deck Link**: {deck_link[1]}")
 
 
