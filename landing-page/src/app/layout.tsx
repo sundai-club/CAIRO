@@ -6,7 +6,7 @@ import { type Metadata } from "next";
 export const metadata: Metadata = {
   title: "CAIRO",
   description: "Chief AI revenue officer",
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  icons: [{ rel: "icon", url: "/CAIRO_logo.webp" }],
 };
 
 export default function RootLayout({

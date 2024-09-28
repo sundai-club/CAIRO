@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image"; // Import the Image component from Next.js
 import { BrainCircuit, MessageSquare, Target, Lightbulb } from "lucide-react";
 
 export default function LandingPage() {
@@ -6,10 +7,16 @@ export default function LandingPage() {
     <div className="flex min-h-screen flex-col bg-gradient-to-br from-purple-600 via-pink-500 to-red-500 text-white">
       <header className="flex h-20 items-center bg-opacity-90 px-6 shadow-lg backdrop-blur-md lg:px-12">
         <Link className="flex items-center justify-center" href="#">
-          <BrainCircuit className="h-10 w-10 text-white transition duration-300 hover:text-black" />
-          <span className="ml-3 text-4xl font-extrabold tracking-wider">
+          <Image
+            src="/CAIRO_logo.webp"
+            alt="Cairo Logo"
+            width={100}
+            height={40}
+            className="w-30 h-10 transition duration-300 hover:opacity-80"
+          />
+          {/* <span className="ml-3 text-4xl font-extrabold tracking-wider">
             C<span className="text-black">AI</span>RO
-          </span>
+          </span> */}
         </Link>
       </header>
       <main className="flex-1">
@@ -79,10 +86,13 @@ export default function LandingPage() {
         <div className="container mx-auto px-6 md:px-12">
           <div className="flex flex-col items-center justify-between gap-8 md:flex-row">
             <div className="flex flex-col items-center gap-4 md:flex-row">
-              <BrainCircuit className="h-8 w-8 text-white transition duration-300 hover:text-black" />
-              <p className="text-center text-sm md:text-left">
-                C<span className="text-black">AI</span>RO. All rights reserved.
-              </p>
+              <Image
+                src="/CAIRO_logo.webp"
+                alt="Cairo Logo"
+                width={32}
+                height={32}
+                className="h-4 w-12 transition duration-300 hover:opacity-80"
+              />
             </div>
             <div className="flex gap-8">
               <Link className="text-sm hover:underline" href="#">
