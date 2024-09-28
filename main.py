@@ -158,11 +158,13 @@ if 'hypothesis' in st.session_state:
 
     # TODO: 2 RANK THE LIST OF LEADS ASYNC
         deck_links = process_multiple_jsons(hypothesis)
+        st.write(deck_links)
 
         for i, (hypotheses_, deck_link) in enumerate(zip(hypothesis, deck_links)):
+            hypo_dict = {k:v for k, v in hypotheses_.items() if k in ["hypothesis", "pain_point", "pitch"]}
             with st.expander(f"Hypothesis {i+1}"):
-                for key, value in hypotheses_.items():
+                for key, value in hypo_dict.items():
                     st.write(f"{key}: {value}")
-                st.write(f"Deck Link: {deck_link}")
-                st.components.v1.iframe(f"{deck_link}", height=400, scrolling=True)
+                st.write(f"Deck Link: {deck_link[1]}")
+
 
