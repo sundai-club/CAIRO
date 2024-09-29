@@ -139,7 +139,7 @@ if 'hypothesis' in st.session_state:
             messages = [{"role": "user", "content": input_prompt}]
             full_response = openai_api.get_completion(messages)
             new_hypothesis = parse_llm_response(full_response)
-            message_placeholder.markdown(new_hypothesis)
+            message_placeholder.write(new_hypothesis)
             st.session_state.hypothesis = new_hypothesis
 
         
