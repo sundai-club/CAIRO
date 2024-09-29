@@ -4,7 +4,7 @@ import { BrainCircuit, MessageSquare, Target, Lightbulb } from "lucide-react";
 
 export default function LandingPage() {
   return (
-    <div className="flex min-h-screen flex-col bg-gradient-to-br from-purple-600 via-pink-500 to-red-500 text-white">
+    <div className="flex min-h-screen flex-col bg-gradient-to-br from-purple-600 via-pink-800 to-indigo-700 text-white">
       <header className="flex h-20 items-center bg-opacity-90 px-6 shadow-lg backdrop-blur-md lg:px-12">
         <Link className="flex items-center justify-center" href="#">
           <Image
@@ -25,11 +25,47 @@ export default function LandingPage() {
             <div className="flex flex-col items-center space-y-8 text-center">
               <div className="space-y-6">
                 <h1 className="text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-                  5 Market Hypotheses in a Minute
+                  5 Market Hypotheses
+                  <br />
+                  in &lt; 5 Minutes
                 </h1>
+                <div className="mx-auto max-w-4xl text-white text-opacity-90 md:text-2xl">
+                  <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+                    <div className="flex flex-col items-center">
+                      <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-purple-500 text-2xl font-bold text-white transition duration-300 hover:bg-purple-700">
+                        1
+                      </div>
+                      <p className="text-center text-xl font-semibold">
+                        Craft Hypothesis
+                      </p>
+                    </div>
+                    <div className="flex flex-col items-center">
+                      <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-purple-500 text-2xl font-bold text-white transition duration-300 hover:bg-purple-700">
+                        2
+                      </div>
+                      <p className="text-center text-xl font-semibold">
+                        Discover Ideal Leads
+                      </p>
+                    </div>
+                    <div className="flex flex-col items-center">
+                      <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-purple-500 text-2xl font-bold text-white transition duration-300 hover:bg-purple-700">
+                        3
+                      </div>
+                      <p className="text-center text-xl font-semibold">
+                        Generate Content
+                      </p>
+                    </div>
+                  </div>
+                </div>
                 <p className="mx-auto max-w-3xl text-xl leading-relaxed text-white text-opacity-90 md:text-2xl">
-                  Craft hypothesis, discover ideal leads, and generate content
-                  for optimal navigation towards PMF.
+                  {/* Craft hypothesis, discover ideal leads, and generate content */}
+                  for{" "}
+                  <span className="relative inline-block">
+                    <span className="relative z-10 font-bold">
+                      optimal navigation towards PMF.
+                    </span>
+                    <span className="absolute inset-0 -skew-x-12 bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500 opacity-50"></span>
+                  </span>
                 </p>
               </div>
               <div className="w-full max-w-sm space-y-4">
@@ -45,7 +81,7 @@ export default function LandingPage() {
         <section id="features" className="w-full bg-white py-20 text-gray-900">
           <div className="container mx-auto px-6 md:px-12">
             <h2 className="mb-16 text-center text-3xl font-bold tracking-tight sm:text-4xl">
-              How does C<span className="text-pink-600">AI</span>RO work?
+              How does C<span className="text-purple-500">AI</span>RO work?
             </h2>
             <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 md:grid-cols-3">
               <div className="flex flex-col items-center">
