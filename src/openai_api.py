@@ -1,7 +1,7 @@
 import openai
 from typing import List, Dict, Optional
 from ai21 import AI21Client
-from ai21.models.chat import UserMessage
+from ai21.models.chat import UserMessage, SystemMessage
 
 class OpenAIApi:
     def __init__(self, api_key: Optional[str] = None):
@@ -36,12 +36,18 @@ class JambaAIApi:
         temperature: float = 0.4,
         max_tokens: int = 2048
     ) -> str:
+        mm = []
+        for m in messages:
+            if m["role"]=="user":
+                mm.append(UserMessage(content=m["content"]))
+            elif m["role"]=="system":
+                mm.append(SystemMessage(content=m["content"]))
         try:
             response = self.client.chat.completions.create(
                 model=model,
-                messages=messages,
+                messages=mm,
                 top_p=temperature,
             )
             return str(response.choices[0].message.content)
-        except e:
-            raise Exception(f"Jamba: {str(e)}")
+        except:
+            raise Exception("Jamba")
