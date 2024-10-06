@@ -11,44 +11,49 @@ MAX_RETRIES = 3
 
 
 prompt = """
-You are an expert in Sales and Marketing Automation, specializing in generating detailed customer personas based on company information provided. Your task is to thoroughly analyze the given company details and generate multiple comprehensive customer personas.
+Your task is to generate 5 detailed customer personas based on the company details provided below.
 
-Your analysis should cover, but not be limited to, the following aspects:
+Analysis Requirements:
 
-Demographics (age, gender, location, education, occupation)
-Psychographics (interests, values, lifestyle, attitudes)
-Pain points or challenges the customer faces
-Needs and desires
-How the company's products or services address these needs
-Preferred communication channels
-Preferred device type
-Trigger events that indicate buying opportunities
-Purchasing behavior and decision-making process
-Potential objections to overcome
-Influences and motivators
-Goals and aspirations
-Based on your analysis, generate 5 detailed customer personas. Each persona should represent a distinct segment of the company's target audience. Your personas should be specific, well-reasoned, and grounded in the provided information.
+Your analysis should cover, but not be limited to, the following aspects for each persona:
 
-When formulating your personas:
+Demographics: Age, gender, location, education, occupation.
+Psychographics: Interests, values, lifestyle, attitudes.
+Pain Points or Challenges: Specific problems or challenges the customer faces.
+Needs and Desires: What the customer is seeking to achieve or obtain.
+How the Company Addresses These Needs: Ways in which the company's products or services fulfill the customer's needs.
+Preferred Communication Channels: Methods of communication the customer prefers (e.g., email, social media, phone).
+Preferred Device Type: Devices the customer commonly uses (e.g., smartphone, tablet, desktop).
+Trigger Events: Events or circumstances that indicate a buying opportunity.
+Purchasing Behavior and Decision-Making Process: How the customer makes purchasing decisions.
+Potential Objections to Overcome: Reasons the customer might hesitate to purchase.
+Influences and Motivators: Factors that influence the customer's decisions.
+Goals and Aspirations: What the customer hopes to achieve personally or professionally.
+Pitch: A tailored message that would appeal to the customer.
+Persona Creation Guidelines:
 
-Consider both current and potential future customers.
-Think about how each persona interacts with the company's offerings.
-Reflect on how the company's products or services can be positioned to appeal to each persona.
-Contemplate emerging trends or future needs that might influence the personas.
-Identify trigger events that indicate a buying opportunity for each persona.
-Specify the preferred device type for each persona.
-Please think step-by-step and reason thoroughly over the given company description before generating your personas. Your thought process should be detailed and logical, considering various angles and possibilities.
+Distinct Segments: Each persona should represent a unique segment of the target audience.
+Interaction with Offerings: Consider how each persona interacts with the company's products or services.
+Positioning: Reflect on how the offerings can be positioned to appeal to each persona.
+Emerging Trends: Contemplate trends or future needs that might influence each persona.
+Trigger Events Identification: Identify events that indicate a buying opportunity for each persona.
+Device Preference: Specify the preferred device type for each persona.
+Instructions:
 
-Details about the company:
+Think Step-by-Step:
+
+Reason thoroughly over the company description before generating the personas.
+Your thought process should be detailed and logical, considering various angles and possibilities.
+Articulate your thought process within the <thinking></thinking> tags.
+Generate Personas:
+
+After your analysis, present the personas in the following JSON format.
+Only output the personas without any additional commentary.
+Company Details:
 
 {company_details}
 
-Please articulate your thought process between the given thinking tags:
-
-<thinking></thinking>
-
-After your analysis, please generate the personas in the following JSON format. Only output the personas, without any additional commentary:
-
+Output Format:
 [
   {
     "persona_name": "Name",
@@ -67,25 +72,28 @@ After your analysis, please generate the personas in the following JSON format. 
     "pitch": "Pitch"
   }
 ]
+Final Notes:
 
-Your personas should be concise yet comprehensive, each capturing a distinct aspect of the company's target audience. Avoid repetition and ensure each persona provides a unique insight or perspective on the company's potential customers.
-
-Output:
+Conciseness and Comprehensiveness: Ensure each persona is concise yet comprehensive.
+Uniqueness: Avoid repetition; each persona should provide a unique insight into the company's potential customers.
 """
 
 system_prompt = """
-You are an AI assistant specialized in analyzing company information and generating insightful hypotheses. Your primary function is to interpret company details, identify key aspects of their business model, and formulate well-reasoned hypotheses about their potential impact and value proposition.
-When presented with company information, you will:
+You are an AI assistant specialized in Sales and Marketing Automation. Your primary function is to analyze company information and generate detailed customer personas. Your responsibilities include:
 
-Carefully analyze the provided details to understand the company's core business, target market, and unique offerings.
-Think critically about the industry context and potential market needs that the company might be addressing.
-Use your analytical skills to identify possible pain points the company could solve, services they might offer, and values they could provide to customers, clients, or investors.
-Generate multiple hypotheses that cover these aspects, ensuring they are grounded in the information provided and logical deductions.
-Present your thought process clearly within the designated thinking tags.
-Format your final hypotheses in the specified JSON structure.
-
-You should aim to be thorough in your analysis but concise in your output. Your hypotheses should be clear, relevant, and potentially valuable insights about the company's business potential.
-Remember to focus solely on generating hypotheses based on the given information. Do not include any additional commentary, explanations, or questions in your final output. Adhere strictly to the format specified in the user's prompt.
+Analyzing Company Details:
+Carefully examine the provided company information to understand their core business, products/services, target market, and unique value propositions.
+Generating Customer Personas:
+Create comprehensive customer personas that represent distinct segments of the company's target audience.
+Considering Key Aspects:
+Incorporate demographics, psychographics, pain points, needs, preferred communication channels, preferred device types, trigger events, purchasing behaviors, potential objections, influences, motivators, goals, and aspirations.
+Structured Thinking Process:
+Think step-by-step and reason thoroughly, considering various angles and possibilities.
+Articulate your thought process within the designated thinking tags: <thinking></thinking>.
+Formatting Output:
+Present the final personas in the specified JSON format.
+Do not include any additional commentary or explanations outside the required format.
+Remember to focus solely on generating customer personas based on the given information. Your output should be clear, relevant, and adhere strictly to the format specified in the user's prompt.
 """
 
 
