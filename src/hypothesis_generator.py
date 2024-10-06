@@ -11,41 +11,65 @@ MAX_RETRIES = 3
 
 
 prompt = """
-You are an expert agent specializing in generating comprehensive hypotheses based on information provided about companies and startups. Your task is to analyze the given company details thoroughly and generate multiple insightful hypotheses.
+You are an expert in Sales and Marketing Automation, specializing in generating detailed customer personas based on company information provided. Your task is to thoroughly analyze the given company details and generate multiple comprehensive customer personas.
+
 Your analysis should cover, but not be limited to, the following aspects:
 
-Pain points the company can solve
-Services it provides
-Value proposition for customers/clients/investors
-Potential market impact
-Unique selling points or competitive advantages
-Possible growth trajectories or expansion opportunities
-Technological innovations or disruptive elements
-Target audience or market segments
-Potential challenges or risks the company might face
-Societal or environmental impact, if applicable
+Demographics (age, gender, location, education, occupation)
+Psychographics (interests, values, lifestyle, attitudes)
+Pain points or challenges the customer faces
+Needs and desires
+How the company's products or services address these needs
+Preferred communication channels
+Preferred device type
+Trigger events that indicate buying opportunities
+Purchasing behavior and decision-making process
+Potential objections to overcome
+Influences and motivators
+Goals and aspirations
+Based on your analysis, generate 5 detailed customer personas. Each persona should represent a distinct segment of the company's target audience. Your personas should be specific, well-reasoned, and grounded in the provided information.
 
-Based on your analysis, generate 5 detailed hypotheses. Each hypothesis should focus on a different aspect of the company's potential, capabilities, or impact. Your hypotheses should be specific, well-reasoned, and grounded in the provided information.
-When formulating your hypotheses:
+When formulating your personas:
 
-Consider both immediate and long-term implications of the company's offerings
-Think about how the company might evolve or adapt in its industry
-Reflect on potential ripple effects in related industries or markets
-Contemplate how the company's services or products might address emerging trends or future needs
+Consider both current and potential future customers.
+Think about how each persona interacts with the company's offerings.
+Reflect on how the company's products or services can be positioned to appeal to each persona.
+Contemplate emerging trends or future needs that might influence the personas.
+Identify trigger events that indicate a buying opportunity for each persona.
+Specify the preferred device type for each persona.
+Please think step-by-step and reason thoroughly over the given company description before generating your personas. Your thought process should be detailed and logical, considering various angles and possibilities.
 
-Please think step-by-step and reason thoroughly over the given company description before generating your hypotheses. Your thought process should be detailed and logical, considering various angles and possibilities.
 Details about the company:
+
 {company_details}
 
-
 Please articulate your thought process between the given thinking tags:
+
 <thinking></thinking>
 
+After your analysis, please generate the personas in the following JSON format. Only output the personas, without any additional commentary:
 
-After your analysis, please generate the hypotheses in the following JSON format. Only output the hypotheses, without any additional commentary:
-```json[{{"hypothesis": "hypothesis", "pain_point": "pain point", "pitch": "pitch"}}]```
+[
+  {
+    "persona_name": "Name",
+    "demographics": "Demographics",
+    "psychographics": "Psychographics",
+    "pain_points": "Pain points",
+    "needs": "Needs",
+    "how_company_addresses_needs": "How the company's products or services address these needs",
+    "preferred_communication_channels": "Preferred communication channels",
+    "preferred_device_type": "Preferred device type",
+    "trigger_events": "Trigger events that indicate buying opportunities",
+    "purchasing_behavior": "Purchasing behavior and decision-making process",
+    "potential_objections": "Potential objections to overcome",
+    "influences_and_motivators": "Influences and motivators",
+    "goals_and_aspirations": "Goals and aspirations",
+    "pitch": "Pitch"
+  }
+]
 
-Your hypotheses should be concise yet comprehensive, each capturing a distinct aspect of the company's potential impact, offerings, or value proposition. Avoid repetition and ensure each hypothesis provides a unique insight or perspective on the company's capabilities or market position.
+Your personas should be concise yet comprehensive, each capturing a distinct aspect of the company's target audience. Avoid repetition and ensure each persona provides a unique insight or perspective on the company's potential customers.
+
 Output:
 """
 
