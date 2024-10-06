@@ -7,6 +7,7 @@ from src.prompts import hypotheis_update_prompt
 from src.utils import parse_llm_response
 from src.deck_generation import process_multiple_jsons
 # from src.process_investor_list import get_aldo_data
+from streamlit_card import card
 
 import pandas as pd
 
@@ -36,11 +37,10 @@ with st.form("Get Company Information"):
 
     # Input fields for company information
     with col1:
-        company_name = st.text_input("Company Name",placeholder="Company Name")
         company_website = st.text_input("Company Website URL")
         # Color picker for selecting a color
+        logo_upload = st.file_uploader("Upload Logo", accept_multiple_files=False)
         selected_color = st.color_picker("Pick a Brand Color")
-        # logo_upload = st.file_uploader("Upload Logo", accept_multiple_files=True)
         # location = st.text_input("Location")
         # Add checkboxes for market type
         # st.write("How type of product are you trying to sell?")
@@ -49,8 +49,9 @@ with st.form("Get Company Information"):
         # market_service = st.checkbox("Service")
         # main_message = st.text_area("Main Message")
     with col2:
+        company_name = st.text_input("Company Name",placeholder="Company Name")
         company_description = st.text_area("Company Description",height=200)
-        # product_description = st.text_area("Detailed Product/Service Description")
+        product_description = st.text_area("Detailed Product/Service Description",height=200)
         # st.write("What is your Business Model")
         # customer_b2b = st.checkbox("B2B")
         # customer_b2c = st.checkbox("B2C")
@@ -60,7 +61,7 @@ with st.form("Get Company Information"):
     # TODO: Add a chat bot
 
     # Submit button
-    submitted = st.form_submit_button("Submit")
+    submitted = st.form_submit_button("Submit", help="Submit the form to generate hypotheses")
 
     if submitted:
         # Output the form inputs
@@ -68,7 +69,7 @@ with st.form("Get Company Information"):
         st.write("Company Name:", company_name)
         # st.write("Location:", location)
         st.write("Company Description:", company_description)
-        # st.write("Product/Service Description:", product_description)
+        st.write("Product/Service Description:", product_description)
         # st.write("Main Message:", main_message)
         # st.write("Target Customer:", target_customer)
         # st.write("Customer Type - B2B:", customer_b2b)
@@ -84,7 +85,7 @@ with st.form("Get Company Information"):
             "company_name": company_name,
             # "location": location,
             "company_description": company_description,
-            # "product_description": product_description,
+            "product_description": product_description,
             # "main_message": main_message,
             # "target_customer": target_customer,
             # "customer_b2b": customer_b2b,
