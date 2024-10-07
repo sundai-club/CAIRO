@@ -148,7 +148,7 @@ if 'hypothesis' in st.session_state:
         st.session_state.conversation.append({"role": "assistant", "content": full_response})
 
     # "Done" button to end the conversation
-    if st.button("Done"):
+    if st.button("Start Processing Hypothesis"):
         st.write("CAIRO starting...")
         # Here you can add any wrap-up logic or final processing
         hypothesis = st.session_state.hypothesis
