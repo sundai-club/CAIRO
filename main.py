@@ -167,7 +167,7 @@ if 'hypothesis' in st.session_state:
 
         for i, (hypotheses_, deck_link) in enumerate(zip(hypothesis, deck_links)):
             hypo_dict = {k:v for k, v in hypotheses_.items() if k in ["hypothesis", "pain_point", "pitch"]}
-            st.markdown(f"### Hypothesis {i+1}")
+            st.markdown(f"### Persona {i+1}")
             with st.expander(f"Expand for details"):
                 for key, value in hypo_dict.items():
                     st.markdown(f"**{key}**: {value}")
