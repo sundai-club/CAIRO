@@ -24,9 +24,6 @@ Please think step-by-step and reason thoroughly over the given information befor
 Return all the updated customer personas in the same format as the original personas, without any additional commentary.
 
 Output Format:
-
-json
-Copy code
 [
   {
     "persona_name": "Name",
