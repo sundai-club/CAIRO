@@ -7,7 +7,8 @@ from src.prompts import hypotheis_update_prompt
 from src.utils import parse_llm_response
 from src.deck_generation import process_multiple_jsons
 # from src.process_investor_list import get_aldo_data
-from streamlit_card import card
+# from streamlit_card import card
+import streamlit.components.v1 as components
 
 import pandas as pd
 
@@ -113,6 +114,25 @@ with st.form("Get Company Information"):
 
 st.write("Hypothesis:", hypothesis)
 # TODO: Better UI Display of Hypothesis
+for person in hypothesis:
+    contain_person = st.container(border=True)
+    with contain_person:
+        st.write("Name:", person["persona_name"])
+        st.write("Demographics:", person["demographics"])
+        st.write("Psychographics:", person["psychographics"])
+        st.write("Pain Points:", person["pain_points"])
+        st.write("Needs:", person["needs"])
+        st.write("How the Company Addresses These Needs:", person["how_the_company_addresses_these_needs"])
+        st.write("Preferred Communication Channels:", person["preferred_communication_channels"])
+        st.write("Preferred Device Type:", person["preferred_device_type"])
+        st.write("Trigger Events:", person["trigger_events"])
+        st.write("Purchasing Behavior and Decision-Making Process:", person["purchasing_behavior"])
+        st.write("Potential Objections to Overcome:", person["potential_objections"])
+        st.write("Influences and Motivators:", person["influences_and_motivators"])
+        st.write("Goals and Aspirations:", person["goals_and_aspirations"])
+        st.write("Pitch:", person["pitch"])
+
+
 
 
 
@@ -175,6 +195,7 @@ if 'hypothesis' in st.session_state:
                 for key, value in hypo_dict.items():
                     st.markdown(f"**{key}**: {value}")
                 st.markdown(f"**Deck Link**: {deck_link[1]}")
+                components.iframe(deck_link[1], height=500)
                 st.dataframe(st.session_state.df.sample(5))
 
 
