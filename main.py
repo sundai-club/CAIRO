@@ -112,9 +112,9 @@ with st.form("Get Company Information"):
         if 'conversation' not in st.session_state:
             st.session_state.conversation = []
 
-st.write("Hypothesis:", hypothesis)
+st.write("Hypothesis:", st.session_state.hypothesis)
 # TODO: Better UI Display of Hypothesis
-for person in hypothesis:
+for person in st.session_state.hypothesis:
     contain_person = st.container(border=True)
     with contain_person:
         st.write("Name:", person["persona_name"])
@@ -136,7 +136,7 @@ for person in hypothesis:
 
 
 
-if 'hypothesis' in st.session_state:
+if st.session_state.hypothesis:
     st.subheader("Confirm the Hypothesis")
 
     # Display conversation history
