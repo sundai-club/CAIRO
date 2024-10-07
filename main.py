@@ -112,10 +112,11 @@ with st.form("Get Company Information"):
         if 'conversation' not in st.session_state:
             st.session_state.conversation = []
 
-st.write("Hypothesis:", st.session_state.hypothesis)
+# st.write("Hypothesis:", st.session_state.hypothesis)
 # TODO: Better UI Display of Hypothesis
+i = 1
 for person in st.session_state.hypothesis:
-    contain_person = st.container(border=True)
+    contain_person = st.expander(f"Persona {i}")
     with contain_person:
         st.write("Name:", person["persona_name"])
         st.write("Demographics:", person["demographics"])
@@ -131,8 +132,7 @@ for person in st.session_state.hypothesis:
         st.write("Influences and Motivators:", person["influences_and_motivators"])
         st.write("Goals and Aspirations:", person["goals_and_aspirations"])
         st.write("Pitch:", person["pitch"])
-
-
+        i += 1
 
 
 
@@ -195,7 +195,7 @@ if st.session_state.hypothesis:
                 for key, value in hypo_dict.items():
                     st.markdown(f"**{key}**: {value}")
                 st.markdown(f"**Deck Link**: {deck_link[1]}")
-                components.iframe(deck_link[1], height=500)
+                components.iframe(deck_link[1], height=500, scrolling=True)
                 st.dataframe(st.session_state.df.sample(5))
 
 
