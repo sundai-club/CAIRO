@@ -102,7 +102,8 @@ with st.form("Get Company Information"):
         if 'form_data_json' not in st.session_state:
             st.session_state.form_data = form_data
 
-        hypothesis = generate_hypothesis(form_data_json)
+        with st.spinner("Generating Hypotheses..."):
+            hypothesis = generate_hypothesis(form_data_json)
 
         if 'hypothesis' not in st.session_state:
             st.session_state.hypothesis = hypothesis
@@ -110,7 +111,9 @@ with st.form("Get Company Information"):
         if 'conversation' not in st.session_state:
             st.session_state.conversation = []
 
-        st.write("Hypothesis:", hypothesis)
+st.write("Hypothesis:", hypothesis)
+# TODO: Better UI Display of Hypothesis
+
 
 
 if 'hypothesis' in st.session_state:
