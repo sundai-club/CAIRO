@@ -111,31 +111,30 @@ with st.form("Get Company Information"):
         if 'conversation' not in st.session_state:
             st.session_state.conversation = []
 
-# st.write("Hypothesis:", st.session_state.hypothesis)
-# TODO: Better UI Display of Hypothesis
-i = 1
-for person in st.session_state.hypothesis:
-    contain_person = st.expander(f"Persona {i}")
-    with contain_person:
-        st.write("Name:", person["persona_name"])
-        st.write("Demographics:", person["demographics"])
-        st.write("Psychographics:", person["psychographics"])
-        st.write("Pain Points:", person["pain_points"])
-        st.write("Needs:", person["needs"])
-        st.write("How the Company Addresses These Needs:", person["how_the_company_addresses_these_needs"])
-        st.write("Preferred Communication Channels:", person["preferred_communication_channels"])
-        st.write("Preferred Device Type:", person["preferred_device_type"])
-        st.write("Trigger Events:", person["trigger_events"])
-        st.write("Purchasing Behavior and Decision-Making Process:", person["purchasing_behavior"])
-        st.write("Potential Objections to Overcome:", person["potential_objections"])
-        st.write("Influences and Motivators:", person["influences_and_motivators"])
-        st.write("Goals and Aspirations:", person["goals_and_aspirations"])
-        st.write("Pitch:", person["pitch"])
-        i += 1
-
-
 
 if st.session_state.hypothesis:
+    # st.write("Hypothesis:", st.session_state.hypothesis)
+    # TODO: Better UI Display of Hypothesis
+    i = 1
+    for person in st.session_state.hypothesis:
+        contain_person = st.expander(f"Persona {i}")
+        with contain_person:
+            st.write("Name:", person["persona_name"])
+            st.write("Demographics:", person["demographics"])
+            st.write("Psychographics:", person["psychographics"])
+            st.write("Pain Points:", person["pain_points"])
+            st.write("Needs:", person["needs"])
+            st.write("How the Company Addresses These Needs:", person["how_the_company_addresses_these_needs"])
+            st.write("Preferred Communication Channels:", person["preferred_communication_channels"])
+            st.write("Preferred Device Type:", person["preferred_device_type"])
+            st.write("Trigger Events:", person["trigger_events"])
+            st.write("Purchasing Behavior and Decision-Making Process:", person["purchasing_behavior"])
+            st.write("Potential Objections to Overcome:", person["potential_objections"])
+            st.write("Influences and Motivators:", person["influences_and_motivators"])
+            st.write("Goals and Aspirations:", person["goals_and_aspirations"])
+            st.write("Pitch:", person["pitch"])
+            i += 1
+                
     st.subheader("Confirm the Hypothesis")
 
     # Display conversation history
