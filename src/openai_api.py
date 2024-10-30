@@ -15,12 +15,14 @@ class OpenAIApi:
         max_tokens: int = 2048
     ) -> str:
         try:
+            print("Inside get_completion")
             response = self.client.chat.completions.create(
                 model=model,
                 messages=messages,
                 temperature=temperature,
                 max_tokens=max_tokens
             )
+            print("Response:", response)
             return response.choices[0].message.content
         except openai.OpenAIError as e:
             raise Exception(f"OpenAI API error: {str(e)}")

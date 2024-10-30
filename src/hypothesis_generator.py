@@ -7,6 +7,7 @@ load_dotenv()
 
 openai_api = OpenAIApi()
 
+
 MAX_RETRIES = 3
 
 
@@ -53,6 +54,26 @@ Company Details:
 
 {company_details}
 
+Output Format:
+```json[
+  {{
+    "persona_name": "Name",
+    "demographics": "Demographics",
+    "psychographics": "Psychographics",
+    "pain_points": "Pain points",
+    "needs": "Needs",
+    "how_company_addresses_needs": "How the company's products or services address these needs",
+    "preferred_communication_channels": "Preferred communication channels",
+    "preferred_device_type": "Preferred device type",
+    "trigger_events": "Trigger events that indicate buying opportunities",
+    "purchasing_behavior": "Purchasing behavior and decision-making process",
+    "potential_objections": "Potential objections to overcome",
+    "influences_and_motivators": "Influences and motivators",
+    "goals_and_aspirations": "Goals and aspirations",
+    "pitch": "Pitch"
+  }}
+]```
+
 Output should contain persona name, demographics, psychographics, pain points, needs, how the company addresses these needs, preferred communication channels, preferred device type, trigger events, purchasing behavior, potential objections, 
 influences and motivators, goals and aspirations, and pitch for each persona.
 
@@ -86,9 +107,13 @@ def generate_hypothesis(company_details):
         {"role": "user", "content": prompt.format(company_details=company_details)}]
 
     hypothesis = None
+    print("Inside generate hypithesis")
     for _ in range(MAX_RETRIES):
+        print("Inside for loop")
         try:
+            print("Inside try")
             response = openai_api.get_completion(messages, model="gpt-4o-mini")
+            print("Response:", response)
             hypothesis = parse_llm_response(response)                
             if hypothesis is not None:
                 return hypothesis

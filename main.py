@@ -125,8 +125,7 @@ with st.form("Get Company Information"):
         if 'conversation' not in st.session_state:
             st.session_state.conversation = []
 
-
-if st.session_state.hypothesis:
+if 'hypothsis' in st.session_state:
     # st.write("Hypothesis:", st.session_state.hypothesis)
     # TODO: Better UI Display of Hypothesis
     i = 1
