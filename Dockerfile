@@ -6,6 +6,6 @@ WORKDIR /app
 COPY . ./
 ENV TMPDIR='/var/tmp'
 RUN pip install --upgrade pip
-RUN pip3 install -r requirements.txt
+RUN pip install -r requirements.txt
 ENTRYPOINT ["streamlit", "run"]
 CMD ["main.py", "--server.fileWatcherType", "none"]
