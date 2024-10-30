@@ -35,7 +35,6 @@ st.markdown(
             unsafe_allow_html=True,
         )
 
-st.session_state.hypothesis = None
 
 with st.form("Get Company Information"):
     st.write("Please Input Company Information below")
@@ -120,7 +119,8 @@ with st.form("Get Company Information"):
         if hypothesis is None:
             st.error("Hypothesis generation failed. Please try again.")
 
-        st.session_state.hypothesis = hypothesis
+        if 'hypothesis' not in st.session_state:
+            st.session_state.hypothesis = hypothesis
         
         if 'conversation' not in st.session_state:
             st.session_state.conversation = []
