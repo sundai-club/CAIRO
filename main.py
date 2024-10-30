@@ -11,8 +11,14 @@ from src.deck_generation import process_multiple_jsons
 import streamlit.components.v1 as components
 
 import pandas as pd
+import os
 
 st.session_state.df = pd.read_csv('dev_tools_investors_preseed.xlsx - Sheet1.csv')
+
+if os.getenv("OPENAI_API_KEY"):
+    print("OPENAI_API_KEY is set")
+else:
+    print("OPENAI_API_KEY is not set")
 
 openai_api = OpenAIApi()
 
@@ -100,11 +106,19 @@ with st.form("Get Company Information"):
         }
 
         form_data_json = json.dumps(form_data)
+        print(form_data_json)
         if 'form_data_json' not in st.session_state:
             st.session_state.form_data = form_data
 
+        print("BEfore generating hypothesis")
+
         with st.spinner("Generating Hypotheses..."):
+            print("Generating Hypotheses...")
             hypothesis = generate_hypothesis(form_data_json)
+            print("Hypothesis Generated")
+
+        if hypothesis is None:
+            st.error("Hypothesis generation failed. Please try again.")
 
         st.session_state.hypothesis = hypothesis
         
