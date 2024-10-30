@@ -2,10 +2,11 @@ from src.openai_api import OpenAIApi
 from src.utils import parse_llm_response
 
 from dotenv import load_dotenv
+import os
 load_dotenv()
 
-
-openai_api = OpenAIApi()
+print("\n\n\n")
+openai_api = OpenAIApi(os.getenv("OPENAI_API_KEY"))
 
 
 MAX_RETRIES = 3

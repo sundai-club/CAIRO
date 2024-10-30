@@ -16,6 +16,7 @@ class OpenAIApi:
     ) -> str:
         try:
             print("Inside get_completion")
+            print("model:", model)
             response = self.client.chat.completions.create(
                 model=model,
                 messages=messages,

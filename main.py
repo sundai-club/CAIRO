@@ -20,7 +20,7 @@ if os.getenv("OPENAI_API_KEY"):
 else:
     print("OPENAI_API_KEY is not set")
 
-openai_api = OpenAIApi()
+openai_api = OpenAIApi(os.getenv("OPENAI_API_KEY"))
 
 st.set_page_config(layout="wide")
 
@@ -125,8 +125,8 @@ with st.form("Get Company Information"):
         if 'conversation' not in st.session_state:
             st.session_state.conversation = []
 
-if 'hypothsis' in st.session_state:
-    # st.write("Hypothesis:", st.session_state.hypothesis)
+if 'hypothesis' in st.session_state:
+    st.write("Hypothesis:", st.session_state.hypothesis)
     # TODO: Better UI Display of Hypothesis
     i = 1
     for person in st.session_state.hypothesis:
@@ -137,7 +137,7 @@ if 'hypothsis' in st.session_state:
             st.write("Psychographics:", person["psychographics"])
             st.write("Pain Points:", person["pain_points"])
             st.write("Needs:", person["needs"])
-            st.write("How the Company Addresses These Needs:", person["how_the_company_addresses_these_needs"])
+            st.write("How the Company Addresses These Needs:", person["how_company_addresses_needs"])
             st.write("Preferred Communication Channels:", person["preferred_communication_channels"])
             st.write("Preferred Device Type:", person["preferred_device_type"])
             st.write("Trigger Events:", person["trigger_events"])
