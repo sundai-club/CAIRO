@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { Button } from "./components/button";
+
 import {
   BrainCircuit,
   Rocket,
@@ -34,7 +35,7 @@ export default function LandingPage() {
                 </p>
               </div>
               <div className="w-full max-w-sm space-y-2">
-                <Link href="/get-started">
+                <Link href="#demo">
                   <Button className="w-full bg-white text-purple-600 hover:bg-gray-200">
                     Get Started
                   </Button>
@@ -121,6 +122,18 @@ export default function LandingPage() {
                   Improve your online presence and reach a wider audience.
                 </p>
               </div>
+            </div>
+          </div>
+        </section>
+        <section id="demo" className="w-full bg-gray-100 py-20">
+          <div className="container mx-auto px-6 md:px-12">
+            <div className="relative h-0 overflow-hidden pb-[56.25%]">
+              <iframe
+                src="https://sundai-cairo-199983032721.us-central1.run.app/"
+                className="absolute left-0 top-0 h-full w-full border-0"
+                allowFullScreen
+                title="Cairo Demo"
+              ></iframe>
             </div>
           </div>
         </section>
